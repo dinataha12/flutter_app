@@ -1,99 +1,65 @@
 import 'package:flutter/material.dart';
 
+//هقوم بانشاء جيم تعمل علي مقارنة صورتين بحيث لو الصورتين متطابقتين يظهر جمله تمت المهمه بنجاح
+//لو لا يظهر حاول مره اخري
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: Scaffold(
+      backgroundColor: Colors.indigo,
+      appBar: AppBar(
+        title: Text(
+          'تطابق صورتين',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.indigo[900],
+      ),
+      body: Imagepage(),
+    ),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+//هنا استخدمت stateless widget عشان تسهل عليه عمل hotreload للبيدج
+
+class Imagepage extends StatelessWidget {
+  const Imagepage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      //هنا عملت ودجيت اسمها scaffold الودجيت دي بداخلها ودجيت اسمها safearea عشان ابعد عن البار اللي موجود في الفون من فوق
-      home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 247, 237, 236),
-        body: SafeArea(
-          //هنا هخلي البيدج بتاعتي عباره عن عمود العمود ده مكون من صورة بروفايل تحته اسمي التايتل بتاعي
-          //
-            child: Column(
-              //وكنت عايزه اسال برضو هنا علي حتت ان احط محتوي العمود في ال center والا بنعمل ابعاد افضل انا هسرش برضو عن الموضوع بس عاوزه اعرف رايك واي الافضل
+    //المحتوي هيبقي عباره عن عمود بداخله نص وصف الصف بنحط في صورتين
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Text(
+          'حاول مره اخري',
+          style: TextStyle(
+            fontSize: 42,
+            color: Colors.white,
+          ),
+        ),
+        Row(
           children: [
-            CircleAvatar(
-                radius: 50,
-                //هنا انا انشأت فولدر سميته images وبحط فيه الصور اللي هحتاجها ورحت علي ملف pubspec.yaml عرفته هناك عشان فلاتر يقدر يستوعب الموضوع ويوصل للصور 
-                backgroundImage: AssetImage("images/PersonalImage.png")),
-            Text(
-              "Dina Taha Nada",
-              style: TextStyle(
-                //هنا انا انشات فولدر للفونت وعرفته برضو في ملف اليامل زي الصور بس انا مش متأكدا انا كريته صح والا مسمعش محتاجه حضرتك تشوفه كدا معلش
-                fontFamily: 'LucidaBrightRegular',
-                fontSize: 30,
-                color: const Color.fromARGB(255, 150, 6, 6),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'flutter developer',
-              style: TextStyle(
-                fontFamily: 'LucidaBrightRegular',
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                
-
-              ),
-
-            ),
-            //الكونتينر ده عباره عن ايقون تلفون + رقم الفون
-            Container(
-              color: Colors.blue,
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Icon(Icons.phone, color: Colors.white,),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  Text(
-                    '+201033333333',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                    ),
-                ],
-                    
-              ),
-            ),
-            //ويدجيت لايقون ايميل + اسم الايميل
-            Container(
-              color: Colors.blue,
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Icon(Icons.email, color: Colors.white,),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  Text(
-                    'dinataha@email.com',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                    ),
-                ],
-                    
-              ),
-            ),
-             
-          
+            // ديه ودجيت بستخدمها بس مع الصفوف والاعمده عشان اخيلي حجم الصوره فليكسابول يعني مناسب لجميع الصفحات
+            //او باختصار ان الصوره تاخد عرض الصفحه
+            Expanded(
+                //flex: 2,معناها ان الصوره دي تاخد ضعف المساحه
+                child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Image.asset('images/frownie.png'),
+            )),
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Image.asset('images/frownie.png'),
+            )
+                /*
+                طريقه تانيه لعرض الصور
+                child: Image(
+              image: AssetImage('images/frownie.png'),
+            ),*/
+                ),
           ],
-        )),
-      ),
+        )
+      ],
     );
   }
 }
